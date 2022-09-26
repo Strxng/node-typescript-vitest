@@ -1,12 +1,10 @@
 import { expect, test } from 'vitest'
+import { createDate } from '../tests/utils/create-date'
 import { Appointment } from './appointment'
 
 test('Create an appointment' ,() => {
-  const startsAt = new Date()
-  const endsAt = new Date()
-
-  startsAt.setMilliseconds(startsAt.getMilliseconds() + 1)
-  endsAt.setMilliseconds(startsAt.getMilliseconds() + 2)
+  const startsAt = createDate(1)
+  const endsAt = createDate(2)
 
   const appointment: Appointment = new Appointment({
     customer: 'Leonardo Bazan',
@@ -19,11 +17,8 @@ test('Create an appointment' ,() => {
 })
 
 test('Cannot create an appointment with starts date before now' ,() => {
-  const startsAt = new Date()
-  const endsAt = new Date()
-
-  startsAt.setMilliseconds((new Date()).getMilliseconds() - 1)
-  endsAt.setMilliseconds((new Date()).getMilliseconds() + 1)
+  const startsAt = createDate(-1)
+  const endsAt = createDate(1)
 
   expect(() => {
     new Appointment({
@@ -35,11 +30,9 @@ test('Cannot create an appointment with starts date before now' ,() => {
 })
 
 test('Cannot create an appointment with ends date before or equal to starts date' ,() => {
-  const startsAt = new Date()
-  const endsDateBeforeStartsDate = new Date()
-  const endsDateEqualToStartsDate = new Date()
-
-  endsDateBeforeStartsDate.setMilliseconds(startsAt.getMilliseconds() - 1)
+  const startsAt = createDate()
+  const endsDateEqualToStartsDate = createDate()
+  const endsDateBeforeStartsDate = createDate(-1)
 
   expect(() => {
     new Appointment({
