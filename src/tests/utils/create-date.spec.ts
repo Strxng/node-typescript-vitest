@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { createDate, createDateNow } from "./create-date";
+import { createDate } from "./create-date";
 
 test('Create past date', () => {
   const pastDate = createDate(-1)
@@ -12,6 +12,6 @@ test('Create future date', () => {
 })
 
 test('Create date now', () => {
-  const dateNow = createDateNow()
+  const dateNow = createDate()
   expect(dateNow).toEqual(new Date())
 })
