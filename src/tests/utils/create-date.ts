@@ -1,5 +1,5 @@
-export const createDate = (milliseconds?: number): Date => {
+export const createDate = (days?: number): Date => {
   const dateNow = new Date()
-  dateNow.setMilliseconds(dateNow.getMilliseconds() + (milliseconds || 0))
+  dateNow.setDate(dateNow.getDate() + (days || 0))
   return dateNow
 }
