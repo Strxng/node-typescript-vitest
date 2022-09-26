@@ -5,7 +5,8 @@ test('Create an appointment' ,() => {
   const startsAt = new Date()
   const endsAt = new Date()
 
-  endsAt.setMilliseconds(startsAt.getMilliseconds() + 1)
+  startsAt.setMilliseconds(startsAt.getMilliseconds() + 1)
+  endsAt.setMilliseconds(startsAt.getMilliseconds() + 2)
 
   const appointment: Appointment = new Appointment({
     customer: 'Leonardo Bazan',
