@@ -9,6 +9,10 @@ export class Appointment {
 
   constructor(props: AppointmentProps){
     const { endsAt, startsAt } = props
+    
+    if(startsAt < new Date()){
+      throw new Error('Invalid starts date')
+    }
     if(endsAt <= startsAt){
       throw new Error('Invalid ends date')
     }

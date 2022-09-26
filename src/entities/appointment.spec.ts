@@ -17,17 +17,42 @@ test('Create an appointment' ,() => {
   expect(appointment.customer).toBe('Leonardo Bazan')
 })
 
-test('Cannot create an appointment with ends date before starts date' ,() => {
+test('Cannot create an appointment with starts date before now' ,() => {
   const startsAt = new Date()
   const endsAt = new Date()
 
-  endsAt.setMilliseconds(startsAt.getMilliseconds() - 1)
+  startsAt.setMilliseconds((new Date()).getMilliseconds() - 1)
+  endsAt.setMilliseconds((new Date()).getMilliseconds() + 1)
 
   expect(() => {
     new Appointment({
       customer: 'Leonardo Bazan',
       startsAt,
       endsAt
+    })
+  }).toThrow()
+})
+
+test('Cannot create an appointment with ends date before or equal to starts date' ,() => {
+  const startsAt = new Date()
+  const endsDateBeforeStartsDate = new Date()
+  const endsDateEqualToStartsDate = new Date()
+
+  endsDateBeforeStartsDate.setMilliseconds(startsAt.getMilliseconds() - 1)
+
+  expect(() => {
+    new Appointment({
+      customer: 'Leonardo Bazan',
+      startsAt,
+      endsAt: endsDateBeforeStartsDate
+    })
+  }).toThrow()
+
+  expect(() => {
+    new Appointment({
+      customer: 'Leonardo Bazan',
+      startsAt,
+      endsAt: endsDateEqualToStartsDate
     })
   }).toThrow()
 })
